@@ -1,0 +1,36 @@
+.row {
+    display: flex;
+}
+
+.column {
+  flex: 330%;
+  margin: 0 5px;
+  padding: 5px;
+}
+
+.column.dragzone,
+.column.dropzone {
+  border-style: solid;
+}
+
+.dragitem,
+.dropoption,
+.item {
+  border-style: solid;
+  margin: 4px 0;
+  padding: 2px;
+}
+
+.dropzone.dragged .item {
+  pointer-events: none;
+}
+
+.dragitem, 
+.dropzone.sortable .dropzone-items .item {
+  cursor: move;
+}
+
+.dropzone .dropzone-options,
+.dropzone.hidden .dropzone-items {
+  display: none;
+}

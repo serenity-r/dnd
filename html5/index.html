@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>A Pen by M. Drew LaMar</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <div class="row title">
+  <div class="column">
+    Dragzone
+  </div>
+  <div class="column">
+    Dropzone Steve
+  </div>
+  <div class="column">
+    Dropzone Fred
+  </div>
+</div>
+
+<div class="row">
+  <div class="column dragzone">
+    <div data-value="cyl" data-dropzone="steve" class="dragitem" draggable="true">Cylinders (Steve)</div>
+    <div data-value="am" data-dropzone="steve" class="dragitem" draggable="true">Automatic or Manual? (Steve)</div>
+    <div data-value="sepal" data-dropzone="fred" class="dragitem" draggable="true">Sepal (Fred)</div>
+    <div data-value="petal" data-dropzone="fred" class="dragitem" draggable="true">Petal (Fred)</div>
+  </div>
+  
+  <div id="steve" class="column dropzone sortable">
+    <div class="dropzone-items"></div>
+    <div class="dropzone-options">
+      <div data-value="cyl" class="dropoption">Cyl</div>
+      <div data-value="am" class="dropoption">AM</div>
+    </div>
+  </div>
+  
+  <div id="fred" class="column dropzone sortable">
+    <div class="dropzone-items"></div>
+    <div class="dropzone-options">
+      <div data-value="sepal" class="dropoption">Sepal of Flower</div>
+      <div data-value="petal" class="dropoption">Petal of Flower</div>
+    </div>
+  </div>
+</div>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js'></script>
+<script  src="js/index.js"></script>
+
+</body>
+</html>
