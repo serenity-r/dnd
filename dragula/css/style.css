@@ -14,18 +14,13 @@
 }
 
 .dragitem,
-.dropoption,
-.item {
+.dropoption {
   border-style: solid;
   margin: 4px 0;
   padding: 2px;
 }
 
-.dropzone.dragged .item {
-  pointer-events: none;
-}
-
-.dropzone.red {
+.dropzone.gu-highlight {
   border-color: red;
 }
 

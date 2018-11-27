@@ -1,19 +1,18 @@
-var fred = dragula([document.querySelector('#dragzone-fred'), document.querySelector('#fred')], {
-  copy: function (el, source) {
-    return source === $('#dragzone-fred').get()[0]
-  },
-  accepts: function (el, target) {
-    // Make sure option exists    
-    var dropoption = $(target).children(".dropzone-options").children(".dropoption[data-value=" + $(el).data('value') + "]");
+var copyFunction = function (el, source) {
+  // Source -> Target only
+  return [...document.getElementsByClassName('dragzone')].includes(source)
+}
 
-    return ((target !== $('#dragzone-fred').get()[0]) &&
-            (dropoption.length > 0))
-  },
-  revertOnSpill: true,
-  removeOnSpill: true
-});
+var acceptsFunction = function (el, target) {
+  // Make sure option exists within dropzone  
+  var dropoption = $(target).children(".dropzone-options").children(".dropoption[data-value=" + $(el).data('value') + "]");
 
-fred.on("drop", function(el, target, source, sibling) {
+  // Source -> Target only AND valid available option in dropzone
+  return ((![...document.getElementsByClassName('dragzone')].includes(target)) &&
+          (dropoption.length > 0))
+}
+
+var onDropFunction = function(el, target, source, sibling) {
   // Coming in from source - otherwise, do nothing
   if ($(el).hasClass('dragitem')) {
     // Capture number of existing items with this value
@@ -22,6 +21,7 @@ fred.on("drop", function(el, target, source, sibling) {
     // If set to only one per value
     var multivalued = $(target).hasClass('multivalued');
     if (multivalued || ((!multivalued) && (numitems === 1))) {
+      // Clone option with corresponding value
       var dropoption = $(target).children(".dropzone-options").children(".dropoption[data-value=" + $(el).data('value') + "]");
       var $newItem = dropoption.clone();
       if (sibling) {
@@ -34,12 +34,25 @@ fred.on("drop", function(el, target, source, sibling) {
     // Always remove element coming from source
     this.remove();
   }
-});
+}
 
-fred.on("over", function(el, container, source) {
-  $(container).addClass('red');
-});
+// Highlighting
+var onOverFunction = function(el, container, source) {
+  if ($(container).hasClass('highlight')) {
+    $(container).addClass('gu-highlight');
+  }
+}
+var onOutFunction = function(el, container, source) {
+  $(container).removeClass('gu-highlight');
+}
 
-fred.on("out", function(el, container, source) {
-  $(container).removeClass('red');
+var drake = dragula([...document.getElementsByClassName('dragzone')], {
+  copy: copyFunction,
+  accepts: acceptsFunction,
+  revertOnSpill: true, // Only show shadow element when within dropzone
+  removeOnSpill: true  // If drop outside dropzone, cancel drop
 });
+drake.on("drop", onDropFunction);
+drake.on("over", onOverFunction);
+drake.on("out", onOutFunction);
+drake.containers.push(document.querySelector('#drake'));
