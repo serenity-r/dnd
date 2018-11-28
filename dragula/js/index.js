@@ -1,9 +1,9 @@
-var copyFunction = function (el, source) {
+var copyFunction = function(el, source) {
   // Source -> Target only
   return [...document.getElementsByClassName('dragzone')].includes(source)
 }
 
-var acceptsFunction = function (el, target) {
+var acceptsFunction = function(el, target) {
   // Make sure option exists within dropzone  
   var dropoption = $(target).children(".dropzone-options").children(".dropoption[data-value=" + $(el).data('value') + "]");
 
@@ -29,10 +29,11 @@ var onDropFunction = function(el, target, source, sibling) {
       } else {
         $(target).append($newItem);
       }
+      el.parentNode.replaceChild($newItem[0], el);
+    } else {
+      // Always remove element coming from source
+      this.remove();
     }
-    
-    // Always remove element coming from source
-    this.remove();
   }
 }
 
@@ -56,3 +57,4 @@ drake.on("drop", onDropFunction);
 drake.on("over", onOverFunction);
 drake.on("out", onOutFunction);
 drake.containers.push(document.querySelector('#drake'));
+drake.containers.push(document.querySelector('#steve'));
