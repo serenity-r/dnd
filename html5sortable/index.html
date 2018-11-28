@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>A Pen by M. Drew LaMar</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <div class="row title">
+  <div class="column">
+    Dragzone
+  </div>
+  <div class="column">
+    Dropzone
+  </div>
+</div>
+
+<div class="row">
+  <div class="column dragzone">
+    <div data-value="one" class="dragitem">One</div>
+    <div data-value="two" class="dragitem">Two</div>
+    <div data-value="three" class="dragitem">Three</div>
+    <div data-value="four" class="dragitem">Four</div>
+  </div>
+  
+  <div id="steve" class="column dropzone">
+  </div>
+  <div data-for="steve" class="dropzone-options">
+    <div data-value="one" class="dropoption">1</div>
+    <div data-value="two" class="dropoption">2</div>
+    <div data-value="three" class="dropoption">3</div>
+    <div data-value="four" class="dropoption">4</div>
+  </div>
+</div>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+<script  src="js/html5sortable.js"></script>
+<script  src="js/index.js"></script>
+
+</body>
+</html>
