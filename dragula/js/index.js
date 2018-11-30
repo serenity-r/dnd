@@ -1,18 +1,24 @@
-var copyFunction = function(el, source) {
-  // Source -> Target only
-  return [...document.getElementsByClassName('ds-dragzone')].includes(source)
-}
+var drake = dragula({
+  isContainer: function(el, source) {
+    return el.classList.contains('ds-dragzone');
+  },
+  copy: function(el, source) {
+    // Source -> Target only
+    return [...document.getElementsByClassName('ds-dragzone')].includes(source)
+  },
+  accepts: function(el, target) {
+    // Make sure option exists within dropzone  
+    var dropoption = $(target).children(".ds-dropzone-options").children(".ds-dropoption[data-value=" + $(el).data('value') + "]");
 
-var acceptsFunction = function(el, target) {
-  // Make sure option exists within dropzone  
-  var dropoption = $(target).children(".ds-dropzone-options").children(".ds-dropoption[data-value=" + $(el).data('value') + "]");
+    // Source -> Target only AND valid available option in dropzone
+    return ((![...document.getElementsByClassName('ds-dragzone')].includes(target)) &&
+            (dropoption.length > 0))
+  },
+  revertOnSpill: true, // Only show shadow element when within dropzone
+  removeOnSpill: true  // If drop outside dropzone, cancel drop
+});
 
-  // Source -> Target only AND valid available option in dropzone
-  return ((![...document.getElementsByClassName('ds-dragzone')].includes(target)) &&
-          (dropoption.length > 0))
-}
-
-var onDropFunction = function(el, target, source, sibling) {
+drake.on("drop", function(el, target, source, sibling) {
   // Coming in from source - otherwise, do nothing
   if ($(el).hasClass('ds-dragitem')) {
     // Capture number of existing items with this value
@@ -35,26 +41,17 @@ var onDropFunction = function(el, target, source, sibling) {
       this.remove();
     }
   }
-}
+});
 
 // Highlighting
-var onOverFunction = function(el, container, source) {
+drake.on("over", function(el, container, source) {
   if ($(container).hasClass('ds-highlight')) {
     $(container).addClass('gu-highlight');
   }
-}
-var onOutFunction = function(el, container, source) {
-  $(container).removeClass('gu-highlight');
-}
-
-var drake = dragula([...document.getElementsByClassName('ds-dragzone')], {
-  copy: copyFunction,
-  accepts: acceptsFunction,
-  revertOnSpill: true, // Only show shadow element when within dropzone
-  removeOnSpill: true  // If drop outside dropzone, cancel drop
 });
-drake.on("drop", onDropFunction);
-drake.on("over", onOverFunction);
-drake.on("out", onOutFunction);
+drake.on("out", function(el, container, source) {
+  $(container).removeClass('gu-highlight');
+});
+
 drake.containers.push(document.querySelector('#drake'));
 drake.containers.push(document.querySelector('#steve'));
