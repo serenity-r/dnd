@@ -1,5 +1,5 @@
 var drake = dragula({
-  isContainer: function(el, source) {
+  isContainer: function(el) {
     return el.classList.contains('ds-dragzone');
   },
   copy: function(el, source) {
