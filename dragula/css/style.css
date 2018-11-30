@@ -8,29 +8,29 @@
   padding: 5px;
 }
 
-.column.dragzone,
-.column.dropzone {
+.column.ds-dragzone,
+.column.ds-dropzone {
   border-style: solid;
 }
 
-.dragitem,
-.dropoption {
+.ds-dragitem,
+.ds-dropoption {
   border-style: solid;
   margin: 4px 0;
   padding: 2px;
 }
 
-.dropzone.gu-highlight {
+.ds-dropzone.gu-highlight {
   border-color: red;
 }
 
-.dragitem, 
-.dropzone .dropoption {
+.ds-dragitem, 
+.ds-dropzone .ds-dropoption {
   cursor: move;
 }
 
-.dropzone .dropzone-options,
-.dropzone.hidden .dropoption,
-.dropzone.hidden .dragitem {
+.ds-dropzone .ds-dropzone-options,
+.ds-dropzone.ds-hidden .ds-dropoption,
+.ds-dropzone.ds-hidden .ds-dragitem {
   display: none;
 }

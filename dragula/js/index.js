@@ -1,28 +1,28 @@
 var copyFunction = function(el, source) {
   // Source -> Target only
-  return [...document.getElementsByClassName('dragzone')].includes(source)
+  return [...document.getElementsByClassName('ds-dragzone')].includes(source)
 }
 
 var acceptsFunction = function(el, target) {
   // Make sure option exists within dropzone  
-  var dropoption = $(target).children(".dropzone-options").children(".dropoption[data-value=" + $(el).data('value') + "]");
+  var dropoption = $(target).children(".ds-dropzone-options").children(".ds-dropoption[data-value=" + $(el).data('value') + "]");
 
   // Source -> Target only AND valid available option in dropzone
-  return ((![...document.getElementsByClassName('dragzone')].includes(target)) &&
+  return ((![...document.getElementsByClassName('ds-dragzone')].includes(target)) &&
           (dropoption.length > 0))
 }
 
 var onDropFunction = function(el, target, source, sibling) {
   // Coming in from source - otherwise, do nothing
-  if ($(el).hasClass('dragitem')) {
+  if ($(el).hasClass('ds-dragitem')) {
     // Capture number of existing items with this value
     var numitems = $(target).children("[data-value=" + $(el).data('value') + "]").length;
 
     // If set to only one per value
-    var multivalued = $(target).hasClass('multivalued');
+    var multivalued = $(target).hasClass('ds-multivalued');
     if (multivalued || ((!multivalued) && (numitems === 1))) {
       // Clone option with corresponding value
-      var dropoption = $(target).children(".dropzone-options").children(".dropoption[data-value=" + $(el).data('value') + "]");
+      var dropoption = $(target).children(".ds-dropzone-options").children(".ds-dropoption[data-value=" + $(el).data('value') + "]");
       var $newItem = dropoption.clone();
       if (sibling) {
         $newItem.insertBefore(sibling);
@@ -39,7 +39,7 @@ var onDropFunction = function(el, target, source, sibling) {
 
 // Highlighting
 var onOverFunction = function(el, container, source) {
-  if ($(container).hasClass('highlight')) {
+  if ($(container).hasClass('ds-highlight')) {
     $(container).addClass('gu-highlight');
   }
 }
@@ -47,7 +47,7 @@ var onOutFunction = function(el, container, source) {
   $(container).removeClass('gu-highlight');
 }
 
-var drake = dragula([...document.getElementsByClassName('dragzone')], {
+var drake = dragula([...document.getElementsByClassName('ds-dragzone')], {
   copy: copyFunction,
   accepts: acceptsFunction,
   revertOnSpill: true, // Only show shadow element when within dropzone
